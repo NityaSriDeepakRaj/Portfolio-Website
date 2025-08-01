@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Contact Me | Nitya Sri Deepak Raj</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Responsive overrides */
+    @media (max-width: 1023px) {
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+      }
+      .sidebar.active {
+        transform: translateX(0);
+      }
+      .main-content {
+        margin-left: 0;
+        width: 100%;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+      .contact-container {
+        flex-direction: column;
+      }
+      .contact-left, .contact-form-container {
+        width: 100%;
+        max-width: 100%;
+      }
+      .contact-cards {
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
+      background: #00BFA6;
+      border: none;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 5px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 999;
+    }
+    
+    .overlay.active {
+      display: block;
+    }
+    
+    @media (max-width: 767px) {
+      .contact-card {
+        padding: 1rem;
+      }
+      .form-group {
+        margin-bottom: 1rem;
+      }
+      .form-control {
+        padding: 0.75rem;
+      }
+      .btn-send {
+        padding: 0.75rem 1.5rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .contact-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      .contact-icon {
+        margin-right: 0;
+        margin-bottom: 0.75rem;
+      }
+      .contact-info h3 {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body class="relative">
+  <button class="mobile-menu-btn" id="mobileMenuBtn">
+    <i class="fas fa-bars"></i>
+  </button>
+  <div class="overlay" id="overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-placeholder">
+        <img src="logo.png" alt="Logo">
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About Me</a></li>
+        <li><a href="education.html" class="nav-link">Education</a></li>
+        <li><a href="achievements.html" class="nav-link">Achievements</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="certifications.html" class="nav-link">Certifications</a></li>
+        <li><a href="contact.html" class="nav-link active">Contact Me</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="https://www.linkedin.com/in/nitya-sri-deepak-raj-ba5911311/" class="sidebar-icon" target="_blank" aria-label="LinkedIn">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 11.268h-3v-5.604c0-1.337-.025-3.063-1.868-3.063-1.868 0-2.154 1.459-2.154 2.967v5.7h-3v-10h2.881v1.367h.041c.401-.761 1.381-1.563 2.844-1.563 3.042 0 3.604 2.003 3.604 4.605v5.591z"/></svg>
+      </a>
+      <a href="https://github.com/NityaSriDeepakRaj" class="sidebar-icon" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.334-5.466-5.931 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.553 3.297-1.23 3.297-1.23.653 1.653.242 2.873.119 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.803 5.624-5.475 5.921.43.371.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576 4.765-1.588 8.199-6.084 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+      <a href="https://leetcode.com/u/NityaSriDeepakRaj/" class="sidebar-icon" target="_blank" rel="noopener noreferrer" aria-label="LeetCode">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16.102 17.93l-2.697 2.607c-.466.467-1.111.662-1.823.662s-1.357-.195-1.824-.662l-4.332-4.363c-.467-.467-.702-1.15-.702-1.863s.235-1.357.702-1.824l4.319-4.38c.467-.467 1.125-.645 1.837-.645s1.357.195 1.823.662l2.674 2.609c.514.515 1.365.497 1.9-.038.535-.536.553-1.387.039-1.907l-2.674-2.636c-.425-.416-1.432-1.185-2.809-1.185-1.378 0-2.813.93-3.76 1.89l-4.32 4.38c-.9.903-1.366 2.026-1.366 3.206s.465 2.304 1.366 3.206l4.32 4.38c.947.957 2.382 1.89 3.76 1.89s2.384-.93 3.809-1.89l2.674-2.636c.514-.52.496-1.37-.039-1.906-.535-.534-1.386-.553-1.9-.04z"/><path d="M20.811 13.01H10.666c-.702 0-1.27.604-1.27 1.346s.568 1.346 1.27 1.346h10.145c.701 0 1.27-.604 1.27-1.346s-.569-1.346-1.27-1.346z"/></svg>
+      </a>
+    </div>
+    <button class="sidebar-toggle" aria-label="Toggle Sidebar">
+      <span></span><span></span><span></span>
+    </button>
+  </aside>
+  <main class="main-content">
+    <div class="container mx-auto px-4 py-8">
+    <section id="contact" class="section active">
+      <h2>Contact Me</h2>
+      
+      <div class="contact-container">
+        <!-- Left Column - Contact Cards -->
+        <div class="contact-left">
+          <!-- Email Card -->
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <div class="contact-text">
+              <h4>Email</h4>
+              <a href="nityasri479@gmail.com">nityasri479@gmail.com</a>
+            </div>
+          </div>
+          
+          <!-- Phone Card -->
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </div>
+            <div class="contact-text">
+              <h4>Phone</h4>
+              <a href="tel:+91 XXXXXXXXXX">+91 XXXXXXXXXX</a>
+            </div>
+          </div>
+          
+          <!-- Location Card -->
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <div class="contact-text">
+              <h4>Location</h4>
+              <span>Bengaluru, Karnataka, India</span>
+            </div>
+          </div>
+          
+          <!-- Social Icons -->
+          <div class="contact-social">
+            <a href="https://www.linkedin.com/in/nitya-sri-deepak-raj-ba5911311/" class="social-icon" target="_blank" aria-label="LinkedIn">
+              <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+            <a href="https://github.com/NityaSriDeepakRaj" class="social-icon" target="_blank" aria-label="GitHub">
+              <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.267 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Right Column - Contact Form -->
+        <div class="contact-form-container">
+          <form id="contact-form" class="contact-form">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Your Email</label>
+              <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Your Message</label>
+              <textarea id="message" name="message" rows="5" class="form-control" required></textarea>
+            </div>
+            
+            <div class="form-actions">
+              <button type="submit" class="btn-submit" id="submit-btn">
+                <span class="btn-text">Send Message</span>
+                <span class="btn-loader" style="display: none;">
+                  <span class="dot-spinner">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                  </span>
+                </span>
+              </button>
+            </div>
+            
+            <!-- Success Modal -->
+            <div id="success-modal" class="modal">
+              <div class="modal-content">
+                <div class="modal-icon">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Message Sent Successfully!</h3>
+                <p>Thank you for reaching out. I'll get back to you soon.</p>
+                <button id="close-modal" class="btn-ok">OK</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    </div>
+  </main>
+  <!-- EmailJS Script -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    // Initialize EmailJS
+    (function() {
+      emailjs.init("AXrG4HwDY90wrI3Db"); // Replace with your EmailJS public key
+    })();
+    
+    // Mobile menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      
+      function toggleMenu() {
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+        document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
+      }
+      
+      if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+      }
+      
+      if (overlay) {
+        overlay.addEventListener('click', toggleMenu);
+      }
+      
+      // Close menu when clicking on nav links
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth < 1024) {
+            toggleMenu();
+          }
+        });
+      });
+      
+      // Handle window resize
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        document.body.classList.add('resize-animation-stopper');
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          document.body.classList.remove('resize-animation-stopper');
+        }, 400);
+        
+        if (window.innerWidth >= 1024) {
+          if (sidebar) sidebar.classList.remove('active');
+          if (overlay) overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+      
+      // Contact form submission
+      const contactForm = document.getElementById('contact-form');
+      const submitBtn = document.getElementById('submit-btn');
+      const successModal = document.getElementById('success-modal');
+      const closeModalBtn = document.getElementById('close-modal');
+      
+      // Close modal function
+      function closeModal() {
+        successModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      
+      // Close modal when clicking outside content
+      successModal.addEventListener('click', (e) => {
+        if (e.target === successModal) {
+          closeModal();
+        }
+      });
+      
+      // Close modal when clicking OK button
+      closeModalBtn.addEventListener('click', closeModal);
+      
+      // Close modal with Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && successModal.classList.contains('active')) {
+          closeModal();
+        }
+      });
+      
+      if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          
+          // Show loading state
+          submitBtn.disabled = true;
+          const loader = submitBtn.querySelector('.btn-loader');
+          const btnText = submitBtn.querySelector('.btn-text');
+          
+          // Show loader and hide text
+          if (loader) loader.style.display = 'inline-block';
+          if (btnText) btnText.style.opacity = '0';
+          
+          // Get form data
+          const formData = new FormData(contactForm);
+          const formProps = Object.fromEntries(formData);
+          
+          try {
+            // Prepare email parameters including reply_to
+            const emailParams = {
+              ...formProps,
+              reply_to: formProps.email, // This will set the Reply-To header
+              from_name: formProps.name, // Sender's name
+              to_email: 'your-email@example.com' // Your email where you want to receive messages
+            };
+            
+            // Send email using EmailJS
+            await emailjs.send('service_eaknf5r', 'template_hii8ajm', emailParams);
+            
+            // Show success modal
+            successModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Reset form
+            contactForm.reset();
+          } catch (error) {
+            console.error('Error sending message:', error);
+            alert('Failed to send message. Please try again later.');
+          } finally {
+            // Reset loading state
+            submitBtn.disabled = false;
+            const loader = submitBtn.querySelector('.btn-loader');
+            const btnText = submitBtn.querySelector('.btn-text');
+            
+            // Hide loader and show text
+            if (loader) loader.style.display = 'none';
+            if (btnText) btnText.style.opacity = '1';
+          }
+        });
+      }
+    });
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

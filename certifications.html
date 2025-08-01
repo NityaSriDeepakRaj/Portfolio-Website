@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Certifications | Nitya Sri Deepak Raj</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* Responsive overrides */
+    @media (max-width: 1023px) {
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+      }
+      .sidebar.active {
+        transform: translateX(0);
+      }
+      .main-content {
+        margin-left: 0;
+        width: 100%;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+      .certification-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      }
+      .certification-section {
+        margin-bottom: 2rem;
+      }
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
+      background: #00BFA6;
+      border: none;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 5px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 999;
+    }
+    
+    .overlay.active {
+      display: block;
+    }
+    
+    @media (max-width: 767px) {
+      .certification-card {
+        padding: 1rem;
+      }
+      .certification-image {
+        height: 180px;
+      }
+      .certification-details {
+        padding: 0.75rem 0;
+      }
+      .section-header {
+        margin-bottom: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .certification-grid {
+        grid-template-columns: 1fr;
+      }
+      .certification-card {
+        margin-bottom: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body class="relative">
+  <button class="mobile-menu-btn" id="mobileMenuBtn">
+    <i class="fas fa-bars"></i>
+  </button>
+  <div class="overlay" id="overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-placeholder">
+        <img src="logo.png" alt="Logo">
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About Me</a></li>
+        <li><a href="education.html" class="nav-link">Education</a></li>
+        <li><a href="achievements.html" class="nav-link">Achievements</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="certifications.html" class="nav-link active">Certifications</a></li>
+        <li><a href="contact.html" class="nav-link">Contact Me</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="https://www.linkedin.com/in/nitya-sri-deepak-raj-ba5911311/" class="sidebar-icon" target="_blank" aria-label="LinkedIn">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 11.268h-3v-5.604c0-1.337-.025-3.063-1.868-3.063-1.868 0-2.154 1.459-2.154 2.967v5.7h-3v-10h2.881v1.367h.041c.401-.761 1.381-1.563 2.844-1.563 3.042 0 3.604 2.003 3.604 4.605v5.591z"/></svg>
+      </a>
+      <a href="https://github.com/NityaSriDeepakRaj" class="sidebar-icon" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.334-5.466-5.931 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.553 3.297-1.23 3.297-1.23.653 1.653.242 2.873.119 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.803 5.624-5.475 5.921.43.371.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576 4.765-1.588 8.199-6.084 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+      <a href="https://leetcode.com/u/NityaSriDeepakRaj/" class="sidebar-icon" target="_blank" rel="noopener noreferrer" aria-label="LeetCode">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16.102 17.93l-2.697 2.607c-.466.467-1.111.662-1.823.662s-1.357-.195-1.824-.662l-4.332-4.363c-.467-.467-.702-1.15-.702-1.863s.235-1.357.702-1.824l4.319-4.38c.467-.467 1.125-.645 1.837-.645s1.357.195 1.823.662l2.674 2.609c.514.515 1.365.497 1.9-.038.535-.536.553-1.387.039-1.907l-2.674-2.636c-.425-.416-1.432-1.185-2.809-1.185-1.378 0-2.813.93-3.76 1.89l-4.32 4.38c-.9.903-1.366 2.026-1.366 3.206s.465 2.304 1.366 3.206l4.32 4.38c.947.957 2.382 1.89 3.76 1.89s2.384-.93 3.809-1.89l2.674-2.636c.514-.52.496-1.37-.039-1.906-.535-.534-1.386-.553-1.9-.04z"/><path d="M20.811 13.01H10.666c-.702 0-1.27.604-1.27 1.346s.568 1.346 1.27 1.346h10.145c.701 0 1.27-.604 1.27-1.346s-.569-1.346-1.27-1.346z"/></svg>
+      </a>
+    </div>
+    <button class="sidebar-toggle" aria-label="Toggle Sidebar">
+      <span></span><span></span><span></span>
+    </button>
+  </aside>
+  <main class="main-content">
+    <div class="container mx-auto px-4 py-8">
+    <section id="certifications" class="section active">
+      <h2>Certifications</h2>
+      
+      <!-- Achievements Section -->
+      <div class="certification-section">
+        <div class="section-header">
+          <i class="fas fa-trophy"></i>
+          <h3>Achievements</h3>
+        </div>
+        <div class="certification-grid">
+          <!-- Certificate 1 -->
+          <div class="certificate-card">
+            <div class="certificate-image">
+              <img src="Morse code.jpg" alt="Certificate of Achievement">
+            </div>
+            <div class="certificate-content">
+              <h4>IoT Project Winner</h4>
+              <div class="certificate-meta">
+                <span class="cert-place"><i class="fas fa-map-marker-alt"></i> Bangalore Institute of Technology</span>
+                <span class="cert-date"><i class="far fa-calendar-alt"></i> January 2025</span>
+              </div>
+              <p class="cert-desc">Awarded for exceptional project development and implementation in the field of Internet of Things.</p>
+              <a href="Morse code.jpg" class="view-cert-link" target="_blank">View Certificate <i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+          <div class="certificate-card">
+            <div class="certificate-image">
+              <img src="IDEAVERSE.jpeg" alt="Workshop Participation">
+            </div>
+            <div class="certificate-content">
+              <h4>IDEAVERSE</h4>
+              <div class="certificate-meta">
+                <span class="cert-place">Bangalore Institute of Technology</span>
+                <span class="cert-date">April 2025</span>
+              </div>
+              <p class="cert-desc">One among the top finalists of idea pitching competition.</p>
+              <a href="IDEAVERSE.jpeg" class="view-cert-link" target="_blank">View Certificate <i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Participation Section -->
+      <div class="certification-section">
+        <div class="section-header">
+          <i class="fas fa-users"></i>
+          <h3>Participation</h3>
+        </div>
+        <div class="certification-grid">
+          
+          <!-- Certificate 1 -->
+          <div class="certificate-card">
+            <div class="certificate-image">
+              <img src="RV Hackathon.jpeg" alt="Hackathon Participation">
+            </div>
+            <div class="certificate-content">
+              <h4>Ctrl+Alt+Compete Hackathon</h4>
+              <div class="certificate-meta">
+                <span class="cert-place">RV College of Engineering</span>
+                <span class="cert-date">June 2025</span>
+              </div>
+              <p class="cert-desc">Participated in a 12hr hackathon.</p>
+              <a href="RV Hackathon.jpeg" class="view-cert-link" target="_blank">View Certificate <i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+          
+          <!-- Certificate 2 -->
+            <div class="certificate-card">
+            <div class="certificate-image">
+              <img src="AINCAT.jpg" alt="Hackathon Participation">
+            </div>
+            <div class="certificate-content">
+              <h4>AINCAT</h4>
+              <div class="certificate-meta">
+                <span class="cert-place"><i class="fas fa-map-marker-alt"></i> Naukri Campus</span>
+                <span class="cert-date"><i class="far fa-calendar-alt"></i> May 2025</span>
+              </div>
+              <p class="cert-desc">Participated in Aptitude Test.</p>
+              <a href="AINCAT.pdf" class="view-cert-link" target="_blank">View Certificate <i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+          
+          <div class="certificate-card">
+            <div class="certificate-image">
+              <img src="machine learning competition.jpg" alt="Hackathon Participation">
+            </div>
+            <div class="certificate-content">
+              <h4>Machine Learning Competition</h4>
+              <div class="certificate-meta">
+                <span class="cert-place">Bangalore Institute of Technology</span>
+                <span class="cert-date">March 2025</span>
+              </div>
+              <p class="cert-desc">Participated in a ML workshop.</p>
+              <a href="machine learning competition.jpg" class="view-cert-link" target="_blank">View Certificate <i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+
+          <div class="certificate-card">
+            <div class="certificate-image">
+              <img src="Road Safety Hackathon.jpeg" alt="Hackathon Participation">
+            </div>
+            <div class="certificate-content">
+              <h4>Road Safety Hackathon</h4>
+              <div class="certificate-meta">
+                <span class="cert-place"><i class="fas fa-map-marker-alt"></i> HOAI and NHAI</span>
+                <span class="cert-date"><i class="far fa-calendar-alt"></i> February 2025</span>
+              </div>
+              <p class="cert-desc">Participated in National Road Safety Hackathon.</p>
+              <a href="Road Safety Hackathon.jpeg" class="view-cert-link" target="_blank">View Certificate <i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+
+          <div class="certificate-card">
+            <div class="certificate-image">
+              <img src="maths day.jpg" alt="Conference Participation">
+            </div>
+            <div class="certificate-content">
+              <h4>National Mathematics Day</h4>
+              <div class="certificate-meta">
+                <span class="cert-place">Bangalore Institute of Technology</span>
+                <span class="cert-date">December 2024</span>
+              </div>
+              <p class="cert-desc">Participated in the PPT presentation Competition.</p>
+              <a href="maths day.jpg" class="view-cert-link" target="_blank">View Certificate <i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Courses Section -->
+      <div class="certification-section">
+        <div class="section-header">
+          <i class="fas fa-graduation-cap"></i>
+          <h3>Courses</h3>
+        </div>
+        <div class="certification-grid">
+          <!-- Certificate 1 -->
+          <div class="certificate-card">
+            <div class="certificate-image">
+              <img src="C Programming Course.jpg" alt="C Programming Course">
+            </div>
+            <div class="certificate-content">
+              <h4>C Programming Course</h4>
+              <div class="certificate-meta">
+                <span class="cert-place"><i class="fas fa-map-marker-alt"></i> Infosys SpringBoard</span>
+                <span class="cert-date"><i class="far fa-calendar-alt"></i> March 2025</span>
+              </div>
+              <p class="cert-desc">Completed a course on C programming.</p>
+              <a href="C Programming Course.pdf" class="view-cert-link" target="_blank">View Certificate <i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+          
+          <!-- Certificate 2 -->
+          <div class="certificate-card">
+            <div class="certificate-image">
+              <img src="HTML5-The Language.jpg" alt="HTML5 Course">
+            </div>
+            <div class="certificate-content">
+              <h4>HTML5 Course</h4>
+              <div class="certificate-meta">
+                <span class="cert-place"><i class="fas fa-map-marker-alt"></i> Infosys SpringBoard</span>
+                <span class="cert-date"><i class="far fa-calendar-alt"></i> March 2025</span>
+              </div>
+              <p class="cert-desc">Completed HTML5 course.</p>
+              <a href="HTML5-The Language.pdf" class="view-cert-link" target="_blank">View Certificate <i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+          
+          <!-- Certificate 3 -->
+          <div class="certificate-card">
+            <div class="certificate-image">
+              <img src="Programming in c (infosys sprigboard).jpg" alt="C Programming Course">
+            </div>
+            <div class="certificate-content">
+              <h4>C Programming</h4>
+              <div class="certificate-meta">
+                <span class="cert-place"><i class="fas fa-map-marker-alt"></i> Infosys SpringBoard</span>
+                <span class="cert-date"><i class="far fa-calendar-alt"></i> March 2025</span>
+              </div>
+              <p class="cert-desc">Completed C Programming course.</p>
+              <a href="Programming in c (infosys sprigboard).pdf" class="view-cert-link" target="_blank">View Certificate <i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+    </div>
+  </main>
+  <script src="script.js"></script>
+  <script>
+    // Mobile menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      
+      function toggleMenu() {
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+        document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
+      }
+      
+      mobileMenuBtn.addEventListener('click', toggleMenu);
+      overlay.addEventListener('click', toggleMenu);
+      
+      // Close menu when clicking on nav links
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth < 1024) {
+            toggleMenu();
+          }
+        });
+      });
+      
+      // Handle window resize
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        document.body.classList.add('resize-animation-stopper');
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          document.body.classList.remove('resize-animation-stopper');
+        }, 400);
+        
+        if (window.innerWidth >= 1024) {
+          sidebar.classList.remove('active');
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

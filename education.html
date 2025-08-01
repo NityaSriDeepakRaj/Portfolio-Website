@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Education | Nitya Sri Deepak Raj</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Responsive overrides */
+    @media (max-width: 1023px) {
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+      }
+      .sidebar.active {
+        transform: translateX(0);
+      }
+      .main-content {
+        margin-left: 0;
+        width: 100%;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+      .education-cards {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .edu-card {
+        flex-direction: column;
+      }
+      .edu-card-left, .edu-card-right {
+        width: 100%;
+      }
+      .edu-image {
+        max-width: 100%;
+        margin-bottom: 1rem;
+      }
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
+      background: #00BFA6;
+      border: none;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 5px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 999;
+    }
+    
+    .overlay.active {
+      display: block;
+    }
+    
+    @media (max-width: 767px) {
+      .edu-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .edu-duration {
+        margin-top: 0.5rem;
+      }
+      .edu-description {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body class="relative">
+  <button class="mobile-menu-btn" id="mobileMenuBtn">
+    <i class="fas fa-bars"></i>
+  </button>
+  <div class="overlay" id="overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-placeholder">
+        <img src="logo.png" alt="Logo">
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About Me</a></li>
+        <li><a href="education.html" class="nav-link active">Education</a></li>
+        <li><a href="achievements.html" class="nav-link">Achievements</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="certifications.html" class="nav-link">Certifications</a></li>
+        <li><a href="contact.html" class="nav-link">Contact Me</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="https://www.linkedin.com/in/nitya-sri-deepak-raj-ba5911311/" class="sidebar-icon" target="_blank" aria-label="LinkedIn">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 11.268h-3v-5.604c0-1.337-.025-3.063-1.868-3.063-1.868 0-2.154 1.459-2.154 2.967v5.7h-3v-10h2.881v1.367h.041c.401-.761 1.381-1.563 2.844-1.563 3.042 0 3.604 2.003 3.604 4.605v5.591z"/></svg>
+      </a>
+      <a href="https://github.com/NityaSriDeepakRaj" class="sidebar-icon" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.334-5.466-5.931 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.553 3.297-1.23 3.297-1.23.653 1.653.242 2.873.119 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.803 5.624-5.475 5.921.43.371.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576 4.765-1.588 8.199-6.084 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+      <a href="https://leetcode.com/u/NityaSriDeepakRaj/" class="sidebar-icon" target="_blank" rel="noopener noreferrer" aria-label="LeetCode">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16.102 17.93l-2.697 2.607c-.466.467-1.111.662-1.823.662s-1.357-.195-1.824-.662l-4.332-4.363c-.467-.467-.702-1.15-.702-1.863s.235-1.357.702-1.824l4.319-4.38c.467-.467 1.125-.645 1.837-.645s1.357.195 1.823.662l2.674 2.609c.514.515 1.365.497 1.9-.038.535-.536.553-1.387.039-1.907l-2.674-2.636c-.425-.416-1.432-1.185-2.809-1.185-1.378 0-2.813.93-3.76 1.89l-4.32 4.38c-.9.903-1.366 2.026-1.366 3.206s.465 2.304 1.366 3.206l4.32 4.38c.947.957 2.382 1.89 3.76 1.89s2.384-.93 3.809-1.89l2.674-2.636c.514-.52.496-1.37-.039-1.906-.535-.534-1.386-.553-1.9-.04z"/><path d="M20.811 13.01H10.666c-.702 0-1.27.604-1.27 1.346s.568 1.346 1.27 1.346h10.145c.701 0 1.27-.604 1.27-1.346s-.569-1.346-1.27-1.346z"/></svg>
+      </a>
+    </div>
+    <button class="sidebar-toggle" aria-label="Toggle Sidebar">
+      <span></span><span></span><span></span>
+    </button>
+  </aside>
+  <main class="main-content">
+    <div class="container mx-auto px-4 py-8">
+    <section id="education" class="section active">
+      <h2>Education</h2>
+      <div class="education-cards">
+        <!-- BIT Card -->
+        <div class="edu-card">
+          <div class="edu-card-left">
+            <img src="BIT.png" alt="BIT Campus" class="edu-image">
+          </div>
+          <div class="edu-card-right">
+            <div class="edu-header">
+              <h3>Bachelor of Engineering</h3>
+              <div class="edu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                  <path d="M6 12v5c3 3 9 1 9-2v-5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="edu-institution">Bangalore Institute of Technology</div>
+            <p class="edu-description">Pursuing Computer Science and Engineering with main focus on DSA and Web Development.</p>
+            <div class="edu-footer">
+              <span class="edu-duration">2024 - 2028</span>
+              <span class="edu-gpa">CGPA: 9.53/10.0</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- DCFL College Card -->
+        <div class="edu-card">
+          <div class="edu-card-left">
+            <img src="DCFL.avif" alt="DCFL College" class="edu-image">
+          </div>
+          <div class="edu-card-right">
+            <div class="edu-header">
+              <h3>Pre-University Education</h3>
+              <div class="edu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="edu-institution">Deeksha CFL PU College</div>
+            <p class="edu-description">Specialized in Mathematics, Physics, and Chemistry with focus on competitive exam preparation.</p>
+            <div class="edu-footer">
+              <span class="edu-duration">2022 - 2024</span>
+              <span class="edu-gpa">Percentage: 98%</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Carmel School Card -->
+        <div class="edu-card">
+          <div class="edu-card-left">
+            <img src="carmel school.jpg" alt="Carmel School" class="edu-image">
+          </div>
+          <div class="edu-card-right">
+            <div class="edu-header">
+              <h3>Schooling</h3>
+              <div class="edu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="edu-institution">Carmel School</div>
+            <p class="edu-description">Comprehensive secondary education with strong foundation in sciences and mathematics.</p>
+            <div class="edu-footer">
+              <span class="edu-duration">2010 - 2022</span>
+              <span class="edu-gpa">Percentage: 94.4%</span>
+            </div>
+          </div>
+        </div>
+    </section>
+    </div>
+  </main>
+  <script src="script.js"></script>
+  <script>
+    // Mobile menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      
+      function toggleMenu() {
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+        document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
+      }
+      
+      mobileMenuBtn.addEventListener('click', toggleMenu);
+      overlay.addEventListener('click', toggleMenu);
+      
+      // Close menu when clicking on nav links
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth < 1024) {
+            toggleMenu();
+          }
+        });
+      });
+      
+      // Handle window resize
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        document.body.classList.add('resize-animation-stopper');
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          document.body.classList.remove('resize-animation-stopper');
+        }, 400);
+        
+        if (window.innerWidth >= 1024) {
+          sidebar.classList.remove('active');
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
