@@ -313,8 +313,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize EmailJS with your public key
     emailjs.init("kSnm3tHVv5vxYWXpC");
 
+    // Prevent form submission on mobile keyboard 'go' button
+    const formInputs = contactForm.querySelectorAll('input, textarea');
+    formInputs.forEach(input => {
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && window.innerWidth <= 768) {
+                e.preventDefault();
+                // Find the next input or submit button
+                const formElements = Array.from(contactForm.elements);
+                const currentIndex = formElements.indexOf(e.target);
+                const nextElement = formElements[currentIndex + 1];
+                
+                if (nextElement) {
+                    nextElement.focus();
+                } else {
+                    // If it's the last field, blur to dismiss the keyboard
+                    e.target.blur();
+                }
+            }
+        });
+    });
+
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        e.stopPropagation();
 
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
