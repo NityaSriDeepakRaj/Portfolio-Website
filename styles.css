@@ -2660,8 +2660,15 @@ main {
   }
   
   .profile-photo {
-    width: 300px;
-    height: 300px;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 20px;
+    object-fit: contain;
+    border: 3px solid #00BFA6;
+    box-shadow: 0 8px 30px rgba(0, 194, 255, 0.15);
+    display: block;
+    margin: 0 auto 2rem;
   }
 }
 
@@ -2675,8 +2682,15 @@ main {
   }
   
   .profile-photo {
-    width: 280px;
-    height: 280px;
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    border-radius: 20px;
+    object-fit: contain;
+    border: 3px solid #00BFA6;
+    box-shadow: 0 8px 30px rgba(0, 194, 255, 0.15);
+    display: block;
+    margin: 0 auto 2rem;
   }
   
   .home-text h2 {
@@ -2717,9 +2731,15 @@ main {
   }
   
   .profile-photo {
-    width: 260px;
-    height: 260px;
-    margin-bottom: 1rem;
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 20px;
+    object-fit: contain;
+    border: 3px solid #00BFA6;
+    box-shadow: 0 8px 30px rgba(0, 194, 255, 0.15);
+    display: block;
+    margin: 0 auto 2rem;
   }
 }
 

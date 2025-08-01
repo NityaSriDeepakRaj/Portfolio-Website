@@ -24,9 +24,12 @@ document.body.appendChild(pullIndicator);
 
 // Touch start handler
 function handleTouchStart(e) {
-    if (window.scrollY === 0) {
+    // Only activate pull-to-refresh when at the very top of the page
+    if (window.scrollY <= 5) {
         touchStartY = e.touches[0].clientY;
         isPulling = true;
+    } else {
+        isPulling = false;
     }
 }
 
@@ -37,7 +40,8 @@ function handleTouchMove(e) {
     const touchY = e.touches[0].clientY;
     const pullDistance = touchY - touchStartY;
     
-    if (pullDistance > 0) {
+    // Only prevent default when we're actually pulling down
+    if (pullDistance > 10) {
         e.preventDefault();
         
         // Update pull indicator
@@ -55,14 +59,14 @@ function handleTouchMove(e) {
 function handleTouchEnd(e) {
     if (!isPulling) return;
     
-    const touchEndY = e.changedTouches[0].clientY;
+    const touchEndY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
     const pullDistance = touchEndY - touchStartY;
     
     // Reset pull indicator
     pullIndicator.style.backgroundColor = 'transparent';
     
-    // Only refresh if pulled hard enough
-    if (pullDistance > PULL_THRESHOLD) {
+    // Only refresh if pulled hard enough and we're at the top of the page
+    if (pullDistance > PULL_THRESHOLD && window.scrollY <= 5) {
         window.location.reload();
     }
     
@@ -70,14 +74,30 @@ function handleTouchEnd(e) {
 }
 
 // Add event listeners with proper options
-document.addEventListener('touchstart', handleTouchStart, { passive: true });
-document.addEventListener('touchmove', handleTouchMove, { passive: false });
-document.addEventListener('touchend', handleTouchEnd, { passive: true });
+function setupTouchHandlers() {
+    // Define options for event listeners
+    const passiveOpts = { passive: true };
+    
+    // Remove any existing listeners to prevent duplicates
+    document.removeEventListener('touchstart', handleTouchStart, passiveOpts);
+    document.removeEventListener('touchmove', handleTouchMove);
+    document.removeEventListener('touchend', handleTouchEnd, passiveOpts);
+    
+    // Add new listeners with proper options
+    document.addEventListener('touchstart', handleTouchStart, passiveOpts);
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    document.addEventListener('touchend', handleTouchEnd, passiveOpts);
+}
 
-// Allow zooming but prevent default gesture behavior
-document.documentElement.addEventListener('gesturestart', function(e) {
-    e.preventDefault();
-    return false;
+// Initialize touch handlers when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    setupTouchHandlers();
+    
+    // Allow zooming but prevent default gesture behavior
+    document.documentElement.addEventListener('gesturestart', function(e) {
+        e.preventDefault();
+        return false;
+    });
 });
 
 // Mobile Navigation
@@ -345,40 +365,47 @@ document.addEventListener('DOMContentLoaded', function() {
     setupEventListeners();
   }
   
-  // Start the app
   // Set active link based on current page
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  
-  navLinks.forEach(link => {
-    const linkHref = link.getAttribute('href');
-    if ((currentPage === 'index.html' && linkHref === 'index.html') || 
-        (currentPage === linkHref)) {
-      link.classList.add('active');
-    } else {
-      link.classList.remove('active');
-    }
+  function setActiveLink() {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     
-    // For single page navigation (if any sections exist on the same page)
-    if (linkHref.startsWith('#')) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          // Remove active from all links
-          navLinks.forEach(l => l.classList.remove('active'));
-          // Add active to clicked link
-          this.classList.add('active');
-          // Scroll to target
-          targetElement.scrollIntoView({ behavior: 'smooth' });
-          closeSidebarOnNav();
-        }
-      });
-    }
-  });
+    navLinks.forEach(link => {
+      const linkHref = link.getAttribute('href');
+      if ((currentPage === 'index.html' && linkHref === 'index.html') || 
+          (currentPage === linkHref)) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+      
+      // For single page navigation (if any sections exist on the same page)
+      if (linkHref && linkHref.startsWith('#')) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            // Remove active from all links
+            navLinks.forEach(l => l.classList.remove('active'));
+            // Add active to clicked link
+            this.classList.add('active');
+            // Scroll to target
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+            // Close sidebar on mobile after navigation
+            if (window.innerWidth <= 768) {
+              toggleMenu(e, true);
+            }
+          }
+        });
+      }
+    });
+  }
+  
+  // Initialize active link
+  setActiveLink();
 });
 
-
+// Initialize contact form when DOM is loaded
 
 // Contact form submission with EmailJS
 document.addEventListener('DOMContentLoaded', () => {
