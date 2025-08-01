@@ -5,10 +5,83 @@ const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const overlay = document.getElementById('overlay');
 const closeBtn = document.querySelector('.close-btn');
 
+// Custom pull-to-refresh handling
+let touchStartY = 0;
+let isPulling = false;
+const PULL_THRESHOLD = 150; // Minimum distance to trigger refresh
+
+// Add pull indicator element
+const pullIndicator = document.createElement('div');
+pullIndicator.style.position = 'fixed';
+pullIndicator.style.top = '0';
+pullIndicator.style.left = '0';
+pullIndicator.style.right = '0';
+pullIndicator.style.height = '4px';
+pullIndicator.style.backgroundColor = 'transparent';
+pullIndicator.style.zIndex = '9999';
+pullIndicator.style.transition = 'background-color 0.2s';
+document.body.appendChild(pullIndicator);
+
+// Touch start handler
+function handleTouchStart(e) {
+    if (window.scrollY === 0) {
+        touchStartY = e.touches[0].clientY;
+        isPulling = true;
+    }
+}
+
+// Touch move handler
+function handleTouchMove(e) {
+    if (!isPulling) return;
+    
+    const touchY = e.touches[0].clientY;
+    const pullDistance = touchY - touchStartY;
+    
+    if (pullDistance > 0) {
+        e.preventDefault();
+        
+        // Update pull indicator
+        const pullProgress = Math.min(pullDistance / PULL_THRESHOLD, 1);
+        pullIndicator.style.backgroundColor = `rgba(0, 191, 166, ${pullProgress * 0.8})`;
+        
+        // If pulled hard enough, show active state
+        if (pullDistance > PULL_THRESHOLD) {
+            pullIndicator.style.backgroundColor = '#00BFA6';
+        }
+    }
+}
+
+// Touch end handler
+function handleTouchEnd(e) {
+    if (!isPulling) return;
+    
+    const touchEndY = e.changedTouches[0].clientY;
+    const pullDistance = touchEndY - touchStartY;
+    
+    // Reset pull indicator
+    pullIndicator.style.backgroundColor = 'transparent';
+    
+    // Only refresh if pulled hard enough
+    if (pullDistance > PULL_THRESHOLD) {
+        window.location.reload();
+    }
+    
+    isPulling = false;
+}
+
+// Add event listeners with proper options
+document.addEventListener('touchstart', handleTouchStart, { passive: true });
+document.addEventListener('touchmove', handleTouchMove, { passive: false });
+document.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+// Allow zooming but prevent default gesture behavior
+document.documentElement.addEventListener('gesturestart', function(e) {
+    e.preventDefault();
+    return false;
+});
+
 // Mobile Navigation
 document.addEventListener('DOMContentLoaded', function() {
-  'use strict';
-  
   let isMenuOpen = false;
   let resizeTimeout;
   const TRANSITION_DURATION = 300;
@@ -19,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (event) {
       event.preventDefault();
       event.stopPropagation();
-      event.stopImmediatePropagation();
     }
 
     // If forceClose is true, always close the menu
@@ -37,7 +109,6 @@ document.addEventListener('DOMContentLoaded', function() {
       
       document.body.classList.add('menu-open');
       document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
       
       if (sidebar) {
         sidebar.style.transform = 'translateX(0)';
@@ -212,17 +283,15 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // Close menu when clicking outside
-  const handleClickOutside = function(event) {
+  function handleClickOutside(event) {
     // Check if click is outside sidebar and not on menu button
     if (isMenuOpen && 
-        sidebar && 
         !sidebar.contains(event.target) && 
         event.target !== mobileMenuBtn && 
-        mobileMenuBtn && 
         !mobileMenuBtn.contains(event.target)) {
       toggleMenu(event, true); // Force close the menu
     }
-  };
+  }
   
   // Set up event listeners
   function setupEventListeners() {
@@ -274,146 +343,75 @@ document.addEventListener('DOMContentLoaded', function() {
   function init() {
     initMobileMenu();
     setupEventListeners();
-    
-    // Set active link based on current page
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    
-    navLinks.forEach(link => {
-      const linkHref = link.getAttribute('href');
-      if ((currentPage === 'index.html' && linkHref === 'index.html') || 
-          (currentPage === linkHref)) {
-        link.classList.add('active');
-      } else {
-        link.classList.remove('active');
-      }
-      
-      // For single page navigation (if any sections exist on the same page)
-      if (linkHref && linkHref.startsWith('#')) {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          const targetId = this.getAttribute('href');
-          const targetElement = document.querySelector(targetId);
-          if (targetElement) {
-            // Remove active from all links
-            navLinks.forEach(l => l.classList.remove('active'));
-            // Add active to clicked link
-            this.classList.add('active');
-            // Scroll to target
-            targetElement.scrollIntoView({ behavior: 'smooth' });
-            closeSidebarOnNav();
-          }
-        });
-      }
-    });
   }
+  
+  // Start the app
+  // Set active link based on current page
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  
+  navLinks.forEach(link => {
+    const linkHref = link.getAttribute('href');
+    if ((currentPage === 'index.html' && linkHref === 'index.html') || 
+        (currentPage === linkHref)) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+    
+    // For single page navigation (if any sections exist on the same page)
+    if (linkHref.startsWith('#')) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          // Remove active from all links
+          navLinks.forEach(l => l.classList.remove('active'));
+          // Add active to clicked link
+          this.classList.add('active');
+          // Scroll to target
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+          closeSidebarOnNav();
+        }
+      });
+    }
+  });
 });
 
 
 
 // Contact form submission with EmailJS
-// Prevent default touch behavior that might cause page reloads
-function preventDefaultTouchBehavior() {
-    // Set touch-action to allow scrolling
-    document.body.style.touchAction = 'pan-y';
-    document.documentElement.style.touchAction = 'pan-y';
-    
-    // Prevent default touch behaviors only on form elements
-    const formElements = document.querySelectorAll('input, textarea, button, select');
-    
-    formElements.forEach(element => {
-        element.addEventListener('touchstart', function(e) {
-            e.stopPropagation();
-        }, { passive: true });
-        
-        element.addEventListener('touchend', function(e) {
-            e.stopPropagation();
-        }, { passive: true });
-        
-        element.addEventListener('touchmove', function(e) {
-            e.stopPropagation();
-        }, { passive: true });
-    });
-    
-    // Prevent pull-to-refresh
-    let startY = 0;
-    
-    document.addEventListener('touchstart', function(e) {
-        startY = e.touches[0].clientY;
-    }, { passive: true });
-    
-    document.addEventListener('touchmove', function(e) {
-        const y = e.touches[0].clientY;
-        // Only prevent pull-to-refresh when at the top of the page and pulling down
-        if (window.scrollY === 0 && y > startY) {
-            e.preventDefault();
-        }
-    }, { passive: false });
-    
-    // Prevent double-tap zoom
-    document.documentElement.style.touchAction = 'manipulation';
-    
-    // Prevent iOS elastic scrolling
-    document.body.style.overscrollBehavior = 'contain';
-    document.documentElement.style.overscrollBehavior = 'contain';
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-    // Apply touch behavior prevention
-    preventDefaultTouchBehavior();
-    
     const contactForm = document.getElementById('contact-form');
     if (!contactForm) return;
     
     // Initialize EmailJS with your public key
     emailjs.init("kSnm3tHVv5vxYWXpC");
 
-    // Prevent form submission on mobile keyboard 'go' button and other interactions
-    const formInputs = contactForm.querySelectorAll('input, textarea, button');
-    
+    // Prevent form submission on mobile keyboard 'go' button
+    const formInputs = contactForm.querySelectorAll('input, textarea');
     formInputs.forEach(input => {
-        // Prevent default form submission on enter key
-        input.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && window.innerWidth <= 768) {
                 e.preventDefault();
                 // Find the next input or submit button
                 const formElements = Array.from(contactForm.elements);
                 const currentIndex = formElements.indexOf(e.target);
                 const nextElement = formElements[currentIndex + 1];
                 
-                if (nextElement && nextElement.tagName !== 'BUTTON') {
+                if (nextElement) {
                     nextElement.focus();
-                } else if (nextElement && nextElement.tagName === 'BUTTON') {
-                    // If next element is the submit button, trigger click
-                    nextElement.click();
                 } else {
                     // If it's the last field, blur to dismiss the keyboard
                     e.target.blur();
                 }
             }
         });
-        
-        // Prevent touch events from bubbling up
-        input.addEventListener('touchstart', (e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            input.focus();
-        }, { passive: false });
     });
 
-    // Handle form submission
-    contactForm.addEventListener('submit', function(e) {
-        // Completely prevent default form submission
-        if (e && e.preventDefault) {
-            e.preventDefault();
-            e.stopPropagation();
-            e.stopImmediatePropagation();
-            
-            // If it's a touch event, prevent default touch behavior
-            if (e.type === 'touchend' || e.type === 'touchstart') {
-                e.preventDefault();
-                return false;
-            }
-        }
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
 
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
