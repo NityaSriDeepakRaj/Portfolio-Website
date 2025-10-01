@@ -218,7 +218,7 @@ body.menu-open {
   flex: 1;
   justify-content: flex-start;
   align-items: stretch;
-  gap: 1.5rem;
+  gap: 1rem;
   height: auto;
   min-height: 0;
   margin: 1rem 0;
@@ -931,11 +931,11 @@ html {
 
 /* Main Content */
 .main-content {
-  margin-left: 280px;
-  padding: 2rem;
+  margin-left: 200px;
+  /*padding: 2rem;*/
   min-height: 100vh;
   transition: all 0.3s ease;
-  width: calc(100% - 280px);
+  width: calc(100% - 200px);
   box-sizing: border-box;
 }
 
@@ -1488,7 +1488,7 @@ main {
 }
 
 /* Skills Section */
-.skills-card h3, .hobbies-card h3, .experience-card h3 {
+.skills-card h3, .hobbies-card h3 {
   color: #00BFA6;
   margin-bottom: 1.5rem;
   font-size: 1.3rem;
@@ -1496,7 +1496,7 @@ main {
   display: inline-block;
 }
 
-.hobbies-card h3::after, .experience-card h3::after {
+.hobbies-card h3::after {
   content: '';
   position: absolute;
   bottom: -8px;
@@ -1555,25 +1555,23 @@ main {
   width: 0;
 }
 
-/* Hobbies & Experience Cards */
-.hobbies-card, .experience-card {
+/* Hobbies Card */
+.hobbies-card {
   background: #3a3f47;
   border: 1px solid rgba(0, 194, 255, 0.15);
   border-radius: 12px;
   padding: 2rem;
   margin-bottom: 2rem;
   transition: all 0.3s ease;
-  /*box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);*/
 }
 
-.hobbies-card:hover, .experience-card:hover {
+.hobbies-card:hover {
   transform: translateY(-3px);
-  /*box-shadow: 0 8px 25px rgba(0, 194, 255, 0.15);*/
   border-color: rgba(0, 255, 225, 0.3);
   filter: brightness(1.05);
 }
 
-.hobbies-card h3, .experience-card h3 {
+.hobbies-card h3 {
   color: #00BFA6;
   margin-bottom: 1.5rem;
   font-size: 1.3rem;
@@ -3298,4 +3296,142 @@ main {
 .achievement-card,
 .certification-card {
   opacity: 1;
+}
+
+/* Experience Page Styles */
+.experience-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Offer Letters Grid */
+.offer-letters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Offer Letter Square Card */
+.offer-letter-card {
+  background: #3a3f47;
+  border-radius: 12px;
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 194, 255, 0.15);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  aspect-ratio: 1 / 1;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.offer-letter-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: rgba(0, 255, 225, 0.3);
+}
+
+.offer-letter-card h4 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+}
+
+.offer-role {
+  color: #c9d1d9;
+  font-size: 1.05rem;
+  font-weight: 400;
+  display: block;
+  line-height: 1.5;
+  margin-top: -0.25rem;
+}
+
+.view-offer-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 191, 166, 0.1);
+  color: #00BFA6;
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 194, 255, 0.2);
+}
+
+.view-offer-btn:hover {
+  background: rgba(0, 191, 166, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 191, 166, 0.2);
+}
+
+/* Responsive adjustments for experience cards */
+@media (max-width: 768px) {
+  .experience-subcard {
+    padding: 1.5rem;
+  }
+  
+  .experience-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .experience-duration {
+    margin-left: 0;
+  }
+  
+  .offer-letter-btn {
+    position: static;
+    margin-top: 1rem;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .offer-letters-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .offer-letter-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .offer-card-icon {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .offer-card-icon i {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .offer-letters-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .offer-letter-card {
+    aspect-ratio: auto;
+    min-height: 300px;
+  }
 } 

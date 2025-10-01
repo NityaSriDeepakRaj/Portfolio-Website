@@ -3,38 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>Achievements | Nitya Sri Deepak Raj</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Experience | Nitya Sri Deepak Raj</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#14f2b0',
-            dark: '#2d2d2d',
-          },
-          fontFamily: {
-            poppins: ['Poppins', 'sans-serif'],
-            montserrat: ['Montserrat', 'sans-serif'],
-          },
-        }
-      }
-    }
-  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    .achievement-card {
-      transition: all 0.3s ease;
-    }
-    .achievement-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-    }
-    
     /* Responsive overrides */
     @media (max-width: 1023px) {
       .sidebar {
@@ -50,17 +25,6 @@
       }
       .mobile-menu-btn {
         display: block;
-      }
-      .achievement-card {
-        width: 100%;
-        margin-bottom: 1.5rem;
-      }
-      .achievement-image {
-        width: 100%;
-        height: auto;
-      }
-      .achievement-content {
-        padding: 1.25rem;
       }
     }
     
@@ -94,19 +58,6 @@
     .overlay.active {
       display: block;
     }
-    
-    @media (max-width: 767px) {
-      .achievement-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .achievement-date {
-        margin-top: 0.5rem;
-      }
-      .achievement-description {
-        padding: 0.75rem 0;
-      }
-    }
   </style>
 </head>
 <body class="relative">
@@ -125,8 +76,8 @@
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="about.html" class="nav-link">About Me</a></li>
         <li><a href="education.html" class="nav-link">Education</a></li>
-        <li><a href="experience.html" class="nav-link">Experience</a></li>
-        <li><a href="achievements.html" class="nav-link active">Achievements</a></li>
+        <li><a href="experience.html" class="nav-link active">Experience</a></li>
+        <li><a href="achievements.html" class="nav-link">Achievements</a></li>
         <li><a href="projects.html" class="nav-link">Projects</a></li>
         <li><a href="certifications.html" class="nav-link">Certifications</a></li>
         <li><a href="contact.html" class="nav-link">Contact Me</a></li>
@@ -149,69 +100,51 @@
   </aside>
   <main class="main-content">
     <div class="container mx-auto px-4 py-8">
-    <section id="achievements" class="section active">
-      <h2>Achievements</h2>
-      <div class="education-cards">
-        <!-- Achievement Card 1 -->
-         <div class="edu-card">
-          <div class="edu-card-left">
-            <img src="hackademia1.jpg" alt="Hackathon" class="edu-image">
+    <section id="experience" class="section active">
+      <h2>Experience</h2>
+      
+      <!-- Offer Letters Section -->
+      <div class="certification-section">
+        <div class="section-header">
+          <i class="fas fa-file-contract"></i>
+          <h3>Offer Letters</h3>
+        </div>
+        <div class="offer-letters-grid">
+          <!-- Offer Letter Card 1 -->
+          <div class="offer-letter-card">
+            <h4>OpenIntervue</h4>
+            <span class="offer-role">AI Engineer Intern</span>
+            <a href="Offer Letter(OpenIntervue).pdf" class="view-offer-btn" target="_blank">
+              View Offer Letter
+            </a>
           </div>
-          <div class="edu-card-right">
-            <div class="edu-header">
-              <h3>HACKADEMIA 24-Hour Hackathon</h3>
-              <div class="edu-icon">
-                <i class="fas fa-trophy"></i>
-              </div>
+        </div>
+      </div>
+      
+      <!-- Professional Experience Section -->
+      <div class="certification-section">
+        <div class="section-header">
+          <i class="fas fa-briefcase"></i>
+          <h3>Professional Experience</h3>
+        </div>
+        <div class="experience-cards">
+          <!-- Experience Card 1 -->
+          <div class="experience-subcard">
+            <div class="experience-header">
+              <h4>AI Engineer Intern</h4>
+              <span class="experience-duration">May 2025 - July 2025</span>
             </div>
-            <div class="edu-institution">National College</div>
-            <p class="edu-description">Secured 2nd place in Hackademia, a 24-Hour National Level hackathon showcasing our exceptional skills in AI and machine learning.</p>
-            <div class="edu-footer">
-              <span class="edu-duration">2025</span>
-              <span class="edu-gpa">2nd Place</span>
+            <div class="experience-content">
+              <span class="company">OpenIntervue</span>
+              <p>Worked as a Testing Engineer where I tested their AI software to identify and report bugs, ensuring software quality and reliability.</p>
+              <a href="Nitya Sri Deepak Raj - Certificate of Participation.pdf" class="offer-letter-btn" target="_blank">
+                Completion certificate
+              </a>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="edu-card">
-          <div class="edu-card-left">
-            <img src="iot project.jpeg" alt="Hackathon" class="edu-image">
-          </div>
-          <div class="edu-card-right">
-            <div class="edu-header">
-              <h3>IoT Project Exhibition</h3>
-              <div class="edu-icon">
-                <i class="fas fa-trophy"></i>
-              </div>
-            </div>
-            <div class="edu-institution">Bangalore Institute of Technology</div>
-            <p class="edu-description">Presented Morse Transcoder - A project that demonstrates wireless communication using infrared technology.</p>
-            <div class="edu-footer">
-              <span class="edu-duration">2025</span>
-              <span class="edu-gpa">3rd Place</span>
-            </div>
-          </div>
-        </div>
-        <!-- Achievement Card 2 -->
-        <div class="edu-card equal-spacing">
-          <div class="edu-card-left">
-            <!-- Image removed -->
-          </div>
-          <div class="edu-card-right">
-            <div class="edu-header">
-              <h3>Ideaverse</h3>
-              <div class="edu-icon">
-                <i class="fas fa-trophy"></i>
-              </div>
-            </div>
-            <div class="edu-institution">Bangalore Institute of Technology</div>
-            <p class="edu-description">An idea pitching competition where we were selected as one among the top finalists.</p>
-            <div class="edu-footer">
-              <span class="edu-duration">2025</span>
-              <span class="edu-gpa">Runner Up</span>
-            </div>
-          </div>
-        </div>
     </section>
     </div>
   </main>

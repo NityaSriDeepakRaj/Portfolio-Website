@@ -53,19 +53,8 @@
       .skills-grid {
         grid-template-columns: 1fr;
       }
-      .experience-card, .hobbies-card {
+      .hobbies-card {
         padding: 1.5rem;
-      }
-      .experience-subcard {
-        padding: 1.25rem;
-      }
-      .experience-header {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-      .experience-duration {
-        margin-left: 0;
-        align-self: flex-start;
       }
       .hobbies-list {
         flex-wrap: wrap;
@@ -95,16 +84,6 @@
       .info-value {
         font-size: 0.95rem;
       }
-      .experience-subcard {
-        padding: 1.25rem 1rem;
-      }
-      .experience-content {
-        padding-bottom: 2.5rem;
-      }
-      .offer-letter-btn {
-        right: 1rem;
-        bottom: 0.5rem;
-      }
     }
     
     @media (max-width: 576px) {
@@ -117,14 +96,8 @@
       .skills-card h3 {
         font-size: 1.3rem;
       }
-      .experience-card h3, .hobbies-card h3 {
+      .hobbies-card h3 {
         font-size: 1.4rem;
-      }
-      .experience-item h4 {
-        font-size: 1.1rem;
-      }
-      .experience-item p {
-        font-size: 0.95rem;
       }
       .hobbies-list li {
         padding: 0.5rem 0.9rem;
@@ -153,7 +126,7 @@
       .info-value {
         font-size: 0.9rem;
       }
-      .experience-subcard, .hobbies-card {
+      .hobbies-card {
         padding: 1.25rem 1rem;
       }
       .hobbies-list {
@@ -223,6 +196,7 @@
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="about.html" class="nav-link active">About Me</a></li>
         <li><a href="education.html" class="nav-link">Education</a></li>
+        <li><a href="experience.html" class="nav-link">Experience</a></li>
         <li><a href="achievements.html" class="nav-link">Achievements</a></li>
         <li><a href="projects.html" class="nav-link">Projects</a></li>
         <li><a href="certifications.html" class="nav-link">Certifications</a></li>
@@ -278,7 +252,7 @@
               
               <div class="info-subcard">
                 <span class="info-label">Experience</span>
-                <span class="info-value">1 Month</span>
+                <span class="info-value">2 Months</span>
               </div>
               
               <div class="info-subcard">
@@ -355,9 +329,7 @@
         </div>
       </div>
       
-      <!-- Hobbies & Experience Section -->
-      <div class="hobbies-experience-container">
-        <!-- Hobbies Section -->
+      <!-- Hobbies Section -->
       <div class="hobbies-card">
         <h3>Hobbies</h3>
         <ul class="hobbies-list">
@@ -369,40 +341,6 @@
           <li><i class="fas fa-child"></i> Dancing</li>
           <li><i class="fas fa-palette"></i> Drawing</li>
         </ul>
-      </div>
-      
-      <!-- Experience Section -->
-      <div class="experience-card">
-        <h3>Experience</h3>
-        
-        <!-- Experience Item 1 -->
-        <div class="experience-subcard">
-          <div class="experience-header">
-            <h4>AI Testing Intern</h4>
-            <span class="experience-duration">May 2025 - June 2025</span>
-          </div>
-          <div class="experience-content">
-            <span class="company">OpenIntervue</span>
-            <p>Worked as a Testing Engineer where I tested their AI software to identify and report bugs, ensuring software quality and reliability.</p>
-            <a href="Offer Letter(OpenIntervue).pdf" class="offer-letter-btn" target="_blank" rel="noopener noreferrer">
-              <i class="fas fa-file-alt"></i> View Offer Letter
-            </a>
-          </div>
-        </div>
-        
-        <!-- Experience Item 2 (Example - Add more as needed) -->
-        <!--
-        <div class="experience-subcard">
-          <div class="experience-header">
-            <h4>Position Title</h4>
-            <span class="experience-duration">Month YYYY - Month YYYY</span>
-          </div>
-          <div class="experience-content">
-            <span class="company">Company Name</span>
-            <p>Detailed description of your role and responsibilities.</p>
-          </div>
-        </div>
-        -->
       </div>
     </section>
     </div>
