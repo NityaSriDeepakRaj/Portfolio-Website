@@ -2104,6 +2104,29 @@ main {
   outline: 1px solid #00BFA6;
 }
 
+.project-links {
+  margin-top: 1rem;
+}
+
+.project-links a {
+  display: inline-block;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: #0d1117;
+  background: #00BFA6;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+
+.project-links a:hover {
+  background: #161b22;
+  color: #00BFA6;
+  outline: 1px solid #00BFA6;
+}
+
 .achievement-cards {
   display: flex;
   gap: 2rem;
