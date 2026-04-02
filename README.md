@@ -1,9 +1,5 @@
 # 🌐 Nitya Sri Deepak Raj — Portfolio
 
-![Portfolio Preview](certificates/portfolio-home-page.jpg)
-
-🔗 [Website](https://nitya-portfolio-navy.vercel.app/) | [LinkedIn](https://www.linkedin.com/in/nitya-sri-deepak-raj-ba5911311/) | [GitHub](https://github.com/NityaSriDeepakRaj)
-
 **AI Enthusiast & Full Stack Developer | Building Scalable and Intelligent Web Solutions**
 
 ---
